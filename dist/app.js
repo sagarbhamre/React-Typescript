@@ -1,4 +1,5 @@
 "use strict";
+var _a;
 const e1 = {
     name: 'Sagar',
     privileges: ['create-server'],
@@ -10,57 +11,12 @@ function add(a, b) {
     }
     return a + b;
 }
-function printEmployeeInformation(emp) {
-    console.log('Name: ' + emp.name);
-    if ('privileges' in emp) {
-        console.log('Privileges: ' + emp.privileges);
-    }
-    if ('startDate' in emp) {
-        console.log('Start Date: ' + emp.startDate);
-    }
-}
-printEmployeeInformation(e1);
-class Car {
-    drive() {
-        console.log('Driving...');
-    }
-}
-class Truck {
-    drive() {
-        console.log('Driving truck');
-    }
-    loadCargo(amount) {
-        console.log('Loading cargo ...' + amount);
-    }
-}
-const v1 = new Car();
-const v2 = new Truck();
-function useVehicle(vehicle) {
-    vehicle.drive();
-    if (vehicle instanceof Truck) {
-        vehicle.loadCargo(7);
-    }
-}
-useVehicle(v1);
-useVehicle(v2);
-function moveAnimal(animal) {
-    let speed;
-    switch (animal.type) {
-        case 'bird':
-            speed = animal.flyingSpeed;
-            break;
-        case 'horse':
-            speed = animal.runningSpeed;
-    }
-    console.log('Moving at speed: ' + speed);
-}
-moveAnimal({ type: 'bird', flyingSpeed: 77 });
-const userInputElement = document.getElementById('user-input');
-if (userInputElement) {
-    userInputElement.value = 'Hi There!';
-}
-const errorBag = {
-    email: 'Not a valid email!',
-    username: 'Must start with capital character!'
+const result = add('Sagar', ' Bunty');
+console.log(result);
+const fetchedUserData = {
+    id: 'u1',
+    name: 'Sagar',
+    job: { title: 'CEO', description: 'My Own Company' }
 };
+console.log((_a = fetchedUserData === null || fetchedUserData === void 0 ? void 0 : fetchedUserData.job) === null || _a === void 0 ? void 0 : _a.title);
 //# sourceMappingURL=app.js.map
