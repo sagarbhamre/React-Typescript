@@ -5,8 +5,8 @@ class Department {
         this.name = name;
         this.employees = [];
     }
-    describe() {
-        console.log(`Department (${this.id}): ${this.name}`);
+    static createEmployee(name) {
+        return { name: name };
     }
     addEmployee(employes) {
         this.employees.push(employes);
@@ -16,9 +16,73 @@ class Department {
         console.log(this.employees);
     }
 }
-const accounting = new Department('D1', 'Accounting');
+Department.fiscalYear = 2020;
+class ITDepartment extends Department {
+    constructor(id, admins) {
+        super(id, 'IT');
+        this.admins = admins;
+    }
+    describe() {
+        console.log('IT Department - ID: ', this.id);
+    }
+}
+class AccountingDepartment extends Department {
+    get mostRecentReport() {
+        if (this.lastReport) {
+            return this.lastReport;
+        }
+        throw new Error('No report found.');
+    }
+    set mostRecentReport(value) {
+        if (!value) {
+            throw new Error('Please pass in a valid value!');
+        }
+        this.addReport(value);
+    }
+    constructor(id, reports) {
+        super(id, 'Account');
+        this.reports = reports;
+        this.lastReport = reports[0];
+    }
+    static getInstance() {
+        if (AccountingDepartment.instance) {
+            return this.instance;
+        }
+        this.instance = new AccountingDepartment('d2', []);
+        return this.instance;
+    }
+    describe() {
+        console.log('Accounting Department - ID: ', this.id);
+    }
+    addEmployee(name) {
+        if (name === 'Tanu') {
+            return;
+        }
+        this.employees.push(name);
+    }
+    addReport(text) {
+        this.reports.push(text);
+        this.lastReport = text;
+    }
+    printReports() {
+        console.log(this.reports);
+    }
+}
+const employee1 = Department.createEmployee('Tanu11');
+console.log(employee1, Department.fiscalYear);
+const it = new ITDepartment('D1', ['Max']);
+it.addEmployee('Tanu');
+it.addEmployee('Risha');
+it.describe();
+it.printEmployeeInformation();
+console.log(it);
+const accounting = AccountingDepartment.getInstance();
+const accounting2 = AccountingDepartment.getInstance();
+console.log(accounting, accounting2);
+accounting.mostRecentReport = 'Year end report';
+accounting.addReport('Something went wrong...');
+console.log(accounting.mostRecentReport);
 accounting.addEmployee('Tanu');
-accounting.addEmployee('Risha');
+accounting.addEmployee('Pintu');
 accounting.describe();
-accounting.printEmployeeInformation();
 //# sourceMappingURL=app.js.map
